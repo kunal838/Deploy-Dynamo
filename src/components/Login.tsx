@@ -1,3 +1,4 @@
+"use client"
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
@@ -18,8 +19,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import {signIn} from "next-auth/react"
+import { useRouter } from 'next/navigation'
 
 export default function Login() {
+
+  const router = useRouter()
+
   return (
     <Card className="w-[350px] dark:bg-black dark:border-none ">
       <CardHeader>
@@ -30,7 +36,7 @@ export default function Login() {
         <form>
           <div className="grid w-full items-center gap-4">
          
-           <Button variant="outline"  className="flex dark:bg-black dark:border-none">
+           <Button onClick={()=>router.push("/api/auth/signin")} variant="outline"  className="flex dark:bg-black dark:border-none">
             <img className=" h-10 p-2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVJKqUujEIzlVqHxSOgRHh5zQIX-zdedw7I4i2e1Ml9Q&s" alt="" />
            Login With Google
            </Button>
