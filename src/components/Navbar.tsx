@@ -12,25 +12,35 @@ import {
 } from "@/components/ui/sheet"
 import { Avatar,AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
+import { Rocket } from 'lucide-react';
+import { Label } from './ui/label';
+import Link from 'next/link';
 
-//hello
+
+
 function Navbar() {
   const {data:session}=useSession();
   let isMobile = window.matchMedia("(max-width: 600px)").matches;
-
+  
   if(session){
     return(
       
       <nav className='  flex items-center justify-between'>
           <p className=' font-semibold text-xl p-4'>
-              D-D
-          </p>
-          <div className='p-4  flex space-x-5'>
           <Avatar>
     <AvatarImage src={session.user?.image} />
-    <AvatarFallback>session.user.name</AvatarFallback>
+    <AvatarFallback>{session.user?.name}</AvatarFallback>
   </Avatar>
+          </p>
+          <div className='p-4  flex space-x-5'>
+          
           <Change/>
+          <Link href={"/deploy"}>
+          <Button  >
+          <Rocket />
+          <Label className='ml-2'>New Project</Label>
+        </Button>
+        </Link>
           <Sheet>
   <SheetTrigger>
     <Button>LogOut</Button>
@@ -41,6 +51,7 @@ function Navbar() {
       <SheetDescription>
         This will signOut your device
         <br/>
+       
         <Button className='m-2' onClick={()=>signOut()}>
           sign Out
         </Button>
