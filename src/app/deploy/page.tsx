@@ -13,7 +13,7 @@ import { redirect } from 'next/navigation'
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-const socket = io(`${process.env.SOCKET_URL}`,{
+const socket = io(`api.dd-3.xyz:9002`,{
   path:'/socket.io',
   reconnection:true,
   reconnectionAttempts:5
@@ -48,7 +48,7 @@ export default function Page() {
     setLoading(true);
    
 
-    const { data } = await axios.post(`${process.env.API_URL}/api/project`, {
+    const { data } = await axios.post(`https://api.dd-3.xyz/api/project`, {
       gitURL: repoURL,
       Email: session?.user?.email
     });
