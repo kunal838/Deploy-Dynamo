@@ -13,7 +13,11 @@ import { redirect } from 'next/navigation'
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-const socket = io(`${process.env.API_URL}:9002`);
+const socket = io(`${process.env.SOCKET_URL}`,{
+  path:'/socket.io',
+  reconnection:true,
+  reconnectionAttempts:5
+});
 
 const firaCode = Fira_Code({ subsets: ["latin"] });
 
@@ -44,7 +48,7 @@ export default function Page() {
     setLoading(true);
    
 
-    const { data } = await axios.post(`${process.env.API_URL}:9000/project`, {
+    const { data } = await axios.post(`${process.env.API_URL}/api/project`, {
       gitURL: repoURL,
       Email: session?.user?.email
     });
